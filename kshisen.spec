@@ -5,23 +5,23 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kshisen
-Version  : 18.08.0
-Release  : 1
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kshisen-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kshisen-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kshisen-18.08.0.tar.xz.sig
+Version  : 18.12.2
+Release  : 2
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kshisen-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kshisen-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kshisen-18.12.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
-Requires: kshisen-bin
-Requires: kshisen-data
-Requires: kshisen-license
-Requires: kshisen-locales
+Requires: kshisen-bin = %{version}-%{release}
+Requires: kshisen-data = %{version}-%{release}
+Requires: kshisen-license = %{version}-%{release}
+Requires: kshisen-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : libkdegames-dev
 BuildRequires : libkmahjongg-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 
 %description
 No detailed description available
@@ -29,8 +29,8 @@ No detailed description available
 %package bin
 Summary: bin components for the kshisen package.
 Group: Binaries
-Requires: kshisen-data
-Requires: kshisen-license
+Requires: kshisen-data = %{version}-%{release}
+Requires: kshisen-license = %{version}-%{release}
 
 %description bin
 bin components for the kshisen package.
@@ -69,26 +69,26 @@ locales components for the kshisen package.
 
 
 %prep
-%setup -q -n kshisen-18.08.0
+%setup -q -n kshisen-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535263122
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549890795
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535263122
+export SOURCE_DATE_EPOCH=1549890795
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kshisen
-cp COPYING %{buildroot}/usr/share/doc/kshisen/COPYING
-cp COPYING.DOC %{buildroot}/usr/share/doc/kshisen/COPYING.DOC
+mkdir -p %{buildroot}/usr/share/package-licenses/kshisen
+cp COPYING %{buildroot}/usr/share/package-licenses/kshisen/COPYING
+cp COPYING.DOC %{buildroot}/usr/share/package-licenses/kshisen/COPYING.DOC
 pushd clr-build
 %make_install
 popd
@@ -115,6 +115,7 @@ popd
 /usr/share/metainfo/org.kde.kshisen.appdata.xml
 /usr/share/sounds/kshisen/tile-fall-tile.ogg
 /usr/share/sounds/kshisen/tile-touch.ogg
+/usr/share/xdg/kshisen.categories
 
 %files doc
 %defattr(0644,root,root,0755)
@@ -160,9 +161,9 @@ popd
 /usr/share/doc/HTML/uk/kshisen/kshisen-configuration.png
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kshisen/COPYING
-/usr/share/doc/kshisen/COPYING.DOC
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kshisen/COPYING
+/usr/share/package-licenses/kshisen/COPYING.DOC
 
 %files locales -f kshisen.lang
 %defattr(-,root,root,-)
