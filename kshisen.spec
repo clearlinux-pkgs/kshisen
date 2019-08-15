@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kshisen
-Version  : 19.04.3
-Release  : 9
-URL      : https://download.kde.org/stable/applications/19.04.3/src/kshisen-19.04.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.3/src/kshisen-19.04.3.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.3/src/kshisen-19.04.3.tar.xz.sig
+Version  : 19.08.0
+Release  : 10
+URL      : https://download.kde.org/stable/applications/19.08.0/src/kshisen-19.08.0.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.0/src/kshisen-19.08.0.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.0/src/kshisen-19.08.0.tar.xz.sig
 Summary  : A solitaire-like game played using the standard set of Mahjong tiles
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
@@ -76,16 +76,17 @@ locales components for the kshisen package.
 
 
 %prep
-%setup -q -n kshisen-19.04.3
+%setup -q -n kshisen-19.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562879969
+export SOURCE_DATE_EPOCH=1565907643
 mkdir -p clr-build
 pushd clr-build
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -99,7 +100,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1562879969
+export SOURCE_DATE_EPOCH=1565907643
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kshisen
 cp COPYING %{buildroot}/usr/share/package-licenses/kshisen/COPYING
@@ -128,9 +129,9 @@ popd
 /usr/share/icons/hicolor/64x64/apps/kshisen.png
 /usr/share/kxmlgui5/kshisen/kshisenui.rc
 /usr/share/metainfo/org.kde.kshisen.appdata.xml
+/usr/share/qlogging-categories5/kshisen.categories
 /usr/share/sounds/kshisen/tile-fall-tile.ogg
 /usr/share/sounds/kshisen/tile-touch.ogg
-/usr/share/xdg/kshisen.categories
 
 %files doc
 %defattr(0644,root,root,0755)
